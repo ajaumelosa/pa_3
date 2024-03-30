@@ -1,5 +1,5 @@
 # Programming assignment 3
-2024-03-29
+2024-03-30
 
     ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
     ✔ dplyr     1.1.4     ✔ readr     2.1.5
@@ -29,7 +29,7 @@ dat <- read_csv("./data/vowel_data.csv")
 ``` r
 means <- dat %>%
   group_by(vowel, language) %>%
-  summarise(f1 = mean(f1_cent), f1sd = sd(f1_cent), f2 = mean(f2_cent), f2sd = sd(f2_cent), tl = mean(tl), tlsd = sd(tl))
+  summarise(f1_cent_mean = mean(f1_cent), f1_sd = sd(f1_cent), f2_cent_mean = mean(f2_cent), f2_sd = sd(f2_cent), tl_mean = mean(tl), tl_sd = sd(tl))
 ```
 
     `summarise()` has grouped output by 'vowel'. You can override using the
@@ -39,55 +39,40 @@ means <- dat %>%
 # Trajectory length as a function of vowel anf language
 
 dat %>%
-  ggplot(aes(x = vowel, y = tl, fill = language)) +
-  geom_boxplot()
+  ggplot(aes(x = vowel, y = tl, fill = vowel)) +
+  geom_boxplot() +
+  facet_wrap(~ language, scales = "free_y") +
+  geom_boxplot() +
+  labs(x = "Vowel", y = "Trajectory length", fill = "Vowel")
 ```
 
 ![](README_files/figure-commonmark/plots-1.png)
 
 ``` r
+# F1 as a function of vowel and language
+
 dat %>%
-  ggplot(aes(x = language, y = tl, fill = vowel)) +
-  geom_boxplot()
+  ggplot(aes(x = vowel, y = f1_cent, fill = vowel)) +
+  geom_boxplot() +
+  facet_wrap(~ language, scales = "free_y") +
+  geom_boxplot() +
+  labs(x = "Vowel", y = "F1 Cent", fill = "Vowel")
 ```
 
 ![](README_files/figure-commonmark/plots-2.png)
 
 ``` r
-# F1 as a function of vowel and language
-
-dat %>%
-  ggplot(aes(x = vowel, y = f1_cent, fill = language)) +
-  geom_boxplot()
-```
-
-![](README_files/figure-commonmark/plots-3.png)
-
-``` r
-dat %>%
-  ggplot(aes(x = language, y = f1_cent, fill = vowel)) +
-  geom_boxplot()
-```
-
-![](README_files/figure-commonmark/plots-4.png)
-
-``` r
 # F2 as a function of vowel and language
 
 dat %>%
-  ggplot(aes(x = vowel, y = f2_cent, fill = language)) +
-  geom_boxplot()
+  ggplot(aes(x = vowel, y = f2_cent, fill = vowel)) +
+  geom_boxplot() +
+  facet_wrap(~ language, scales = "free_y") +
+  geom_boxplot() +
+  labs(x = "Vowel", y = "F2 Cent", fill = "Vowel")
 ```
 
-![](README_files/figure-commonmark/plots-5.png)
-
-``` r
-dat %>%
-  ggplot(aes(x = language, y = f2_cent, fill = vowel)) +
-  geom_boxplot()
-```
-
-![](README_files/figure-commonmark/plots-6.png)
+![](README_files/figure-commonmark/plots-3.png)
 
 ``` r
 dat_long <- dat %>%
