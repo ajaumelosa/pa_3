@@ -74,7 +74,7 @@ dat_long <- dat %>%
   ggplot(aes(x = measure, y = val, fill = as.factor(vowel))) +
   geom_point() +
   facet_wrap(~ measure, scales = "free_y") +
-  geom_boxplot() +
+  geom_point() +
   labs(x = "Measure", y = "Average Value", fill = "Vowel")
 
 

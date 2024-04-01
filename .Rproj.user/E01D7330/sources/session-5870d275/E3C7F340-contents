@@ -1,5 +1,5 @@
 # Programming assignment 3
-2024-04-01
+2024-03-30
 
     ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
     ✔ dplyr     1.1.4     ✔ readr     2.1.5
@@ -82,7 +82,7 @@ dat_long <- dat %>%
   ggplot(aes(x = measure, y = val, fill = as.factor(vowel))) +
   geom_point() +
   facet_wrap(~ measure, scales = "free_y") +
-  geom_point() +
+  geom_boxplot() +
   labs(x = "Measure", y = "Average Value", fill = "Vowel")
 ```
 
